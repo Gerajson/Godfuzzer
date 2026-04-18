@@ -3,30 +3,14 @@
 > Важно: этот проект реализует **безопасный** каркас для авторизованного аудита отказоустойчивости и логики.
 > Активная эксплуатация уязвимостей и вредоносные сценарии намеренно не реализованы.
 
-## Быстрый запуск (Windows PowerShell)
-
-```powershell
-py -3.12 -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-pip install -r requirements.txt
-python -m cryptogodfuzzer.main
-```
-
-## Быстрый запуск (Linux/macOS bash)
+## Запуск
 
 ```bash
-python3 -m venv .venv
+python -m venv .venv
 source .venv/bin/activate
-python -m pip install --upgrade pip
 pip install -r requirements.txt
 python -m cryptogodfuzzer.main
 ```
-
-## Совместимость по Python
-
-- Рекомендуется Python **3.11–3.13**.
-- Python 3.14 может требовать новее версии библиотек, если у пакетов ещё нет готовых wheel.
 
 ## Что есть внутри
 
