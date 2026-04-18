@@ -1,0 +1,45 @@
+# Уровень логирования: DEBUG/INFO/WARNING/ERROR/CRITICAL
+log_level: INFO
+
+# Путь к SQLite-файлу для сохранения прогресса сканирования
+sqlite_path: cryptogodfuzzer.db
+
+retry:
+  # Максимальное число повторов сетевого запроса при 429/5xx/timeout
+  max_attempts: 5
+  # Базовая задержка для exponential backoff
+  base_delay: 0.5
+  # Верхняя граница задержки между ретраями
+  max_delay: 20.0
+
+limits:
+  # Лимит параллельных соединений (защита от перегруза VPS)
+  max_concurrency: 25
+  # Максимальный размер ответа в байтах (защита от утечек памяти)
+  max_response_bytes: 1000000
+  # Ограничение на число мутированных тестов на endpoint
+  per_endpoint_tests: 50
+
+proxy:
+  # Включить/выключить прокси-пул
+  enabled: false
+  # Источники, откуда подгружается список прокси
+  sources: []
+  # URL для проверки доступности прокси
+  healthcheck_url: null
+
+modules:
+  # Список включенных модулей (в безопасном режиме)
+  enabled_modules:
+    - websocket_split_brain_sim
+    - cache_header_injection_check
+    - precision_mismatch_check
+  # Таймаут выполнения изолированного сгенерированного модуля
+  module_timeout_sec: 10
+
+scanner:
+  # Разрешенные целевые URL для тестовой/песочничной среды
+  targets:
+    - https://example.com/
+  # WebSocket endpoint'ы для проверок устойчивости соединения
+  websocket_targets: []

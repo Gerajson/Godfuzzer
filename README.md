@@ -1,0 +1,26 @@
+# CryptoGodFuzzer (Safe Authorized Audit Edition)
+
+> Важно: этот проект реализует **безопасный** каркас для авторизованного аудита отказоустойчивости и логики.
+> Активная эксплуатация уязвимостей и вредоносные сценарии намеренно не реализованы.
+
+## Запуск
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python -m cryptogodfuzzer.main
+```
+
+## Что есть внутри
+
+- AsyncCore с graceful shutdown и глобальным exception handler.
+- RequestEngine на aiohttp с retry + exponential backoff.
+- ProxyManager с health-check и выбраковкой мёртвых прокси.
+- StateManager на SQLite (`scan_state`, `findings`, `generated_modules`).
+- ModuleGenerator с `ast.parse()` и запуском в `ProcessPoolExecutor` с таймаутом.
+- Базовые pytest автотесты.
+
+## Надёжность
+
+Проект рассчитан на слабый VPS и нестабильную сеть: есть ретраи, лимиты соединений, лимит размера ответов, полное логирование исключений с трассировкой и сохранение прогресса.
